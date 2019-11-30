@@ -1,7 +1,7 @@
 module.exports = server => {
     const io = require('socket.io')(server);
     const nsp = io.of("/chat")
-    let rooms = []
+    let rooms = ["Immigration", "Women's Rights", "Foster Families", "LGBTQIA", "Civil Rights", "Animals", "Environment", "International", "Community Developement", "Public Policy", "Gun Safety"]
 
     nsp.on('connection', function (socket) {
         socket.emit('connected_success')
@@ -12,11 +12,13 @@ module.exports = server => {
 
         });
 
-        socket.on('chat message', (data) => {
-            const { room, message } = data
-            console.log('got message', message);
-            socket.broadcast.to(room).emit('broadcast', message);
-        });
+        for (const room of this.rooms) {
+            socket.on('chat message', (data) => {
+                const { room, message } = data
+                console.log('got message', message);
+                socket.broadcast.to(room).emit('broadcast', message);
+            });
+        };
 
         socket.on('leave room', (room) => {
             socket.leave(room);
