@@ -1,6 +1,6 @@
 module.exports = server => {
     const io = require('socket.io')(server);
-    const nsp = io.of("/talk")
+    const nsp = io.of("/chat")
     let rooms = []
 
     nsp.on('connection', function (socket) {
