@@ -7,10 +7,28 @@ const http = require("http");
 const app = express();
 const morgan = require('morgan')
 app.use(morgan('combined'))
+const models = require("./models");
 const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+
+//passport and sessions
+var passport = require('./config/passport/passport'); 
+var session = require('express-session'); 
+const MongoStore = require("connect-mongo")(session);
+
+// For Passport
+app.use(session({ 
+    secret: 'keyboard cat', 
+    store: new MongoStore({ mongooseConnection: models}),
+    resave: false, 
+    saveUninitialized: false 
+})); 
+
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 require("./controllers/socket")(server);
 const clientDir = path.join(__dirname, "../client");
 const PORT = process.env.PORT || 8000;
