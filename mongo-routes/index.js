@@ -2,8 +2,7 @@ const path = require("path");
 const router = require("express").Router();
 const chatRoutes = require("./chat.js");
 const eventRoutes = require("./events.js");
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+const celebEvents = require("./celebrities.js");
 
 //your local database url
 //27017 is the default mongoDB port
@@ -25,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URI || localURI, {useNewUrlParser: true})
 
 router.use("/chat", chatRoutes);
 router.use("/events", eventRoutes);
+router.use("/celebrity", celebEvents);
 
 
 module.exports = router;
