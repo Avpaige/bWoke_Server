@@ -7,7 +7,7 @@ const http = require("http");
 const app = express();
 const morgan = require('morgan')
 app.use(morgan('combined'))
-const models = require("./models");
+const models = require("./models-mongo/index"); 
 const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
