@@ -1,6 +1,6 @@
 module.exports = {
-    Messages: require("./chat"),
-    ChatRoom: require("./chatRooms"),
+    Messages: require("./Chat"),
+    ChatRoom: require("./ChatRooms"),
     Events: require("./events"),
     Celeb: require("./celebrities"),
    };
