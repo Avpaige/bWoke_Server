@@ -1,4 +1,13 @@
 {
+  "name": "bwoke-server",
+  "version": "1.0.0",
+  "description": "server for bwoke-mobile",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "AVP",
+  "license": "ISC",
   "dependencies": {
     "app": "^0.1.0",
     "axios": "^0.19.0",
