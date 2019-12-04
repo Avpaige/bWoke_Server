@@ -4,7 +4,9 @@ const chatController = require("../controllers/chat-controller");
 
 // Matches with "/chat" ( post in form, put in account)
 router.route("/")
-    .get(chatController.getMessages) // FE: form
-    .post(chatController.postMessages) // FE: account
+    .post(chatController.postMessage)
+// Matches with "/chat/:room" ( post in form, put in account)
+router.route("/:room")
+    .get(chatController.getMessages)
 
 module.exports = router;

@@ -12,8 +12,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const userController = require("./mysql-routes");
-require("./controllers/socket-contoller")(server);
-const mongoRoutes = require("./mongo_routes");
+require("./controllers/socket")(server);
+const mongoRoutes = require("./mongo-routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
