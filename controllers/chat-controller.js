@@ -1,40 +1,52 @@
-const uuidv4 = require('uuid/v4');
 const db = require("../models-mongo")
 
 module.exports = {
 
     // (POST) - POST EVENT ON FEED PAGE
     postMessage: function (req, res) {
-        // const chatMessage = {
-        //     username: req.body.userID,
-        //     message: req.body.message
-        // };
+        let message = req.body.message;
+        let user = req.body.user;
+        let room = req.body.room
 
-        // // console.log(volunteer)
-        // db.Chat
-        //     .create(chatMessage)
-        //     .then(dbevent => {
-        //         console.log("added", dbevent)
-        //     })
-        //     .catch(err => {
-        //         res.status(422)
-        //         console.log("create volunteer", err)
-        //     });
+        let messagePost = {
+            message: message,
+            username: user
+        }
+
+        db.Messages.create({ messagePost })
+            .then(createdMessage => {
+                return db.ChatRoom.findOneAndUpdate({ room: room }, { $push: { messages: createdMessage._id } }, { new: true })
+                    .then(addedNote => {
+                        console.log("Note added", addedNote);
+                        response.sendStatus(200)
+                        // console.log(addedNote)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.sendStatus(500);
+                    });
+            })
     },
 
     // (GET) - all events
     getMessages: function (req, res) {
-        // db.Chat  
-        //     .find({})
-        //     .sort({ '_id': 1 })
-        //     .then(events => {
-        //         res.json(events)
-        //         console.log("allevents", events)
-        //     })
-        //     .catch(err => {
-        //         res.status(422)
-        //         console.log("get volunteer", err)
-        //     });
+        let room = req.params.room
+
+        db.Article.findOne({ room: room })
+            .populate("messages")
+            .then(foundChats => {
+                // console.log(handlebarsObject)
+                res.json(foundChats);
+
+                console.log(foundChats)
+
+                // response.json(handlebarsObject)
+                response.status(200);
+            })
+            .catch(err => {
+                console.log(err);
+                response.status(500);
+            })
     },
 
 };

@@ -1,5 +1,4 @@
-const uuidv4 = require('uuid/v4');
-const db = require("../models-mysql")
+const db = require("../model-mysql")
 const bcrypt = require("bcrypt");
 
 module.exports = {
