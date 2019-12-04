@@ -18,44 +18,50 @@ module.exports = {
                     { "name": { "$in": [search] } },
                     { "cuase": { "$in": [search] } },
                     { "mission": { "$in": [search] } },
+                    { "url": { "$in": [search] } },
+                    { "tagline": { "$in": [search] } },
                 ]
             })
             .then(results => {
-                res.json(results)
+                if (results === []) {
+                    res.json({ data: "none" });
+                } else {
+                    res.json(results)
+                }
+
             })
             .catch(err => {
-                res.status(422)
+                // res.status(422)
+                res.json({ data: "none" });
                 console.log("create volunteer", err)
             });
     },
 
-    // (GET) - GET CHARITY FROM api
+    // (GET) - GET CHARITY FROM api (DONE)
     getCharity: function (req, res) {
         const search = req.params.search
         const url = `https://api.data.charitynavigator.org/v2/Organizations?app_id=${process.env.CHARITY_ID}&app_key=${process.env.CHARITY_API}&pageSize=1&pageNum=1&search=${search}&searchType=NAME_ONLY&rated=true`
-
         axios
             .get(url)
             .then((response) => {
-                let charityList = []
-                for (let charity of response) {
-                    let name = charity.organization.charityName
-                    let cuase = charity.cause.causeName
-                    let mission = charity.mission
+                let name = response.data[0].organization.charityName
+                let cuase = response.data[0].cause.causeName
+                let mission = response.data[0].mission
+                let url = response.data[0].websiteURL
+                let tagline = response.data[0].tagLine
 
-                    let charityObject = {
-                        name: name,
-                        cuase: cuase,
-                        mission: mission
-                    }
-
-                    charityList.push(charityObject)
+                let charityObject = {
+                    name: name,
+                    cuase: cuase,
+                    mission: mission,
+                    url: url,
+                    tagline: tagline
                 }
+                res.json(charityObject)
 
-                res.json(charityList)
             })
             .catch(err => {
-                res.status(422);
+                res.json({ data: "none" });
                 console.log(err)
             });
     },
@@ -70,19 +76,22 @@ module.exports = {
             .get(url)
             .then((response) => {
 
-                for (let charity of response) {
-                    let name = charity.organization.charityName
-                    let cuase = charity.cause.causeName
-                    let mission = charity.mission
+                let name = response.data[0].organization.charityName
+                let cuase = response.data[0].cause.causeName
+                let mission = response.data[0].mission
+                let url = response.data[0].websiteURL
+                let tagline = response.data[0].tagLine
 
-                    let charityObject = {
-                        name: name,
-                        cuase: cuase,
-                        mission: mission
-                    }
-
-                    resultsList.push(charityObject)
+                let charityObject = {
+                    name: name,
+                    cuase: cuase,
+                    mission: mission,
+                    url: url,
+                    tagline: tagline
                 }
+
+                resultsList.push(charityObject)
+
 
             })
             .then(() => {
@@ -102,19 +111,50 @@ module.exports = {
 
                     })
                     .catch(err => {
-                        res.status(422)
+                        // res.status(422)
                         console.log("create volunteer", err)
                     });
 
             })
             .then(() => res.json(resultsList))
             .catch(err => {
-                res.status(422);
+                // res.status(422);
+                res.json({ data: "none" });
                 console.log(err)
             });
 
 
 
+    },
+    addCeleb: function (req, res) {
+        const celebName = req.body.celeb
+        const charityname = req.body.charity
+        const cuase = req.body.cause
+        const mission = req.body.mission
+        const url = req.body.url
+        const tagline = req.body.tagLine
+
+        const celeb = {
+            celebrity: celebName,
+            name: charityname,
+            cuase: cuase,
+            mission: mission,
+            url: url,
+            tagline: tagline
+        }
+
+
+        // console.log(search)
+        db.Celeb
+            .create(celeb)
+            .then(results => {
+                res.json(results)
+            })
+            .catch(err => {
+                // res.status(422)
+                res.json({ data: "none" });
+                console.log("create volunteer", err)
+            });
     }
 
 };

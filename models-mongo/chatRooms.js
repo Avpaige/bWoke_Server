@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var ChatSchema = new Schema({
+var ChatRoomSchema = new Schema({
   room: {
     type: String,
     required: true
@@ -12,6 +12,6 @@ var ChatSchema = new Schema({
   }]
 });
 
-var chatRoom = mongoose.model("chatRoom", ChatSchema);
+var chatRoom = mongoose.model("ChatRoom", ChatRoomSchema);
 
 module.exports = chatRoom;

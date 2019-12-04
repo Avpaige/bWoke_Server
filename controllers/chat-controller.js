@@ -13,19 +13,34 @@ module.exports = {
             username: user
         }
 
-        db.Messages.create({ messagePost })
-            .then(createdMessage => {
-                return db.ChatRoom.findOneAndUpdate({ room: room }, { $push: { messages: createdMessage._id } }, { new: true })
-                    .then(addedNote => {
-                        console.log("Note added", addedNote);
-                        response.sendStatus(200)
-                        // console.log(addedNote)
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        response.sendStatus(500);
-                    });
+        db.ChatRoom.find({ room: room })
+            .then(room => {
+                if (room === []) {
+                    db.ChatRoom.create({ room: room })
+                }
             })
+            .then(() => {
+                db.Messages.create({ messagePost })
+                    .then(createdMessage => {
+                        return db.ChatRoom.findOneAndUpdate({ room: room }, { $push: { messages: createdMessage._id } }, { new: true })
+                            .then(addedNote => {
+                                console.log("Note added", addedNote);
+                                // res.sendStatus(200)
+                                res.json(addedNote)
+                                // console.log(addedNote)
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.sendStatus(500);
+                            });
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+                res.sendStatus(500);
+            });
+
+
     },
 
     // (GET) - all events
