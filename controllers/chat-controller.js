@@ -1,4 +1,4 @@
-const db = require("../models-mongo/index")
+const db = require("../models-mongo")
 
 module.exports = {
 
