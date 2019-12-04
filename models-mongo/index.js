@@ -1,8 +1,8 @@
 module.exports = {
-    Chat: require("./chat.js"),
-    Room: require("./room.js"),
-    Events: require("./events.js"),
-    Celeb: require("./celebrities.js"),
+    Chat: require("./chat"),
+    Room: require("./room"),
+    Events: require("./events"),
+    Celeb: require("./celebrities"),
    };
   
   

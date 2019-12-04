@@ -1,25 +1,32 @@
 require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 //ALL DEPENDENCIES
 const express = require("express");
+const app = express();
+
 const mongoose = require("mongoose");
+
 const cors = require("cors");
 const http = require("http");
-const app = express();
 const morgan = require('morgan')
 app.use(morgan('combined'))
+
 const server = http.Server(app);
+
 const bodyParser = require("body-parser");
 const path = require("path");
-const cookieParser = require("cookie-parser");
+
 const userController = require("./mysql-routes");
 require("./controllers/socket")(server);
 const mongoRoutes = require("./mongo-routes");
+
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
 const PORT = process.env.PORT || 8000;
 // Requiring our models for syncing
 const db = require("./model-mysql");
+// also udpated force to FALSE so that it wont delete all users everytime the server starts
+db.sequelize.sync({ force: false })
 
 app.use(cors());
 
@@ -28,24 +35,13 @@ app.get("/", function(req, res) {
 });
 
 
-// also udpated force to FALSE so that it wont delete all users everytime the server starts
-db.sequelize.sync({ force: false }).then(() => {
-	// inside our db sync callback, we start the server
-	// this is our way of making sure the server is not listening
-	// to requests if we have not made a db connection
-});
-
 // Express middleware that allows POSTing data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// use the cookie-parser to help with auth token,
-// it must come before the customAuthMiddleware
-app.use(cookieParser());
-
 // serve up the public folder so we can request static
 // assets from the client
-app.use("/assets", express.static(clientDir));
+// app.use("/assets", express.static(clientDir));
 
 // hook up our controllers (MYSQL)
 app.use(userController);
