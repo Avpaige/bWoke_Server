@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var ChatRoomSchema = new Schema({
   room: {
     type: String,
-    required: true
+    allowNull: false,
   },
   messages: [{
     type: Schema.Types.ObjectId,
@@ -12,6 +12,6 @@ var ChatRoomSchema = new Schema({
   }]
 });
 
-var chatRoom = mongoose.model("ChatRoom", ChatRoomSchema);
+var chatRoom = mongoose.model("Room", ChatRoomSchema);
 
 module.exports = chatRoom;

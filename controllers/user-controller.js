@@ -1,4 +1,4 @@
-const db = require("../model-mysql")
+const db = require("../models")
 const bcrypt = require("bcrypt");
 
 module.exports = {
