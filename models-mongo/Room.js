@@ -12,6 +12,6 @@ var ChatRoomSchema = new Schema({
   }]
 });
 
-var chatRoom = mongoose.model("room", ChatRoomSchema);
+var room = mongoose.model("room", ChatRoomSchema);
 
-module.exports = chatRoom;
+module.exports = room;
