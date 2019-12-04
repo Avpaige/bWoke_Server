@@ -1,3 +1,5 @@
+// REMEMBER TO RUN IN MY SQL - CREATE DATABASE vzqlt1dmmjo19zll
+
 'use strict';
 
 const fs = require("fs");
