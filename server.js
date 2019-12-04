@@ -15,7 +15,7 @@ const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const userController = require("./mysql-routes");
+const userController = require("./routes");
 require("./controllers/socket")(server);
 const mongoRoutes = require("./mongo-routes");
 
@@ -24,7 +24,7 @@ const clientDir = path.join(__dirname, "../client");
 // set up the Express App
 const PORT = process.env.PORT || 8000;
 // Requiring our models for syncing
-const db = require("./model-mysql");
+const db = require("./models");
 // also udpated force to FALSE so that it wont delete all users everytime the server starts
 db.sequelize.sync({ force: false })
 

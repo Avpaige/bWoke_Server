@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userRoutes = require("./user.js");
+const userRoutes = require("./user");
 // const mysql = require("mysql2");
 // const connection = mysql.createConnection({
 //     host: "hcm4e9frmbwfez47.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",

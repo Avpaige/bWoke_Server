@@ -4,9 +4,7 @@
   "description": "server for bwoke-mobile",
   "main": "server.js",
   "scripts": {
-    "start": "npm run lite",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lite": "lite-server"
+    "start": "node server.js"
   },
   "author": "AVP",
   "license": "ISC",
@@ -21,7 +19,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http": "^0.0.0",
-    "lite-server": "^2.5.4",
     "mongoose": "^5.7.13",
     "morgan": "^1.9.1",
     "mysql2": "^2.0.1",
