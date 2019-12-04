@@ -17,9 +17,9 @@ const mongoRoutes = require("./mongo-routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 // Requiring our models for syncing
-const db = require("./models");
+const db = require("./model-mysql");
 
 app.use(cors());
 
@@ -42,7 +42,6 @@ app.use(bodyParser.json());
 // use the cookie-parser to help with auth token,
 // it must come before the customAuthMiddleware
 app.use(cookieParser());
-app.use(customAuthMiddleware);
 
 // serve up the public folder so we can request static
 // assets from the client
