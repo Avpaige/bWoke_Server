@@ -1,4 +1,3 @@
-const uuidv4 = require('uuid/v4');
 const db = require("../models-mongo")
 
 module.exports = {
@@ -12,11 +11,12 @@ module.exports = {
             date: req.body.date,
         };
 
-        // console.log(volunteer)
-        db.Event
+        // console.log(event)
+        db.Events
             .create(event)
             .then(dbevent => {
                 console.log("added", dbevent)
+                res.json(dbevent)
             })
             .catch(err => {
                 res.status(422)
@@ -31,11 +31,11 @@ module.exports = {
             .sort({ '_id': -1 })
             .then(events => {
                 res.json(events)
-                console.log("allevents", events)
+                // console.log("allevents", events)
             })
             .catch(err => {
                 res.status(422)
-                console.log("get volunteer", err)
+                console.log("all events", err)
             });
     },
 

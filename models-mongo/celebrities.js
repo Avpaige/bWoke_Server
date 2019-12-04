@@ -35,6 +35,21 @@ const celebritiesSchema = new Schema({
         required: true
     },
 
+    // charity tagline
+    tagline: {
+
+        type: String,
+        unique: false,
+        required: true
+    },
+  // charity url
+    url: {
+
+        type: String,
+        unique: false,
+        required: true
+    },
+
 });
 
 const Celeb = mongoose.model('celebrities', celebritiesSchema)

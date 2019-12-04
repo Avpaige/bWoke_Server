@@ -61,7 +61,7 @@ module.exports = {
                             // console.log(results)
                             // res.send(results)
                             let username = results.username;
-                            return res.json({ username: username });
+                            res.json({ username: username });
                         });
                 } catch (err) {
                     console.log(err);
