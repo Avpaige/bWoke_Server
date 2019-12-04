@@ -79,11 +79,11 @@ module.exports = {
     getMessages: function (req, res) {
         let room = req.params.room
 
-        db.ChatRoom.findOne({ room: room })
+        db.Room.find({ room: room })
             .populate("messages")
             .then(foundChats => {
                 // console.log(handlebarsObject)
-                res.json(foundChats);
+                res.json(foundChats[0].messages);
 
                 console.log(foundChats)
 
