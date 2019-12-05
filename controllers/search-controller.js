@@ -16,7 +16,7 @@ module.exports = {
                 $or: [
                     { "celebrity": { "$in": [search] } },
                     { "name": { "$in": [search] } },
-                    { "cuase": { "$in": [search] } },
+                    { "cause": { "$in": [search] } },
                     { "mission": { "$in": [search] } },
                     { "url": { "$in": [search] } },
                     { "tagline": { "$in": [search] } },
@@ -45,14 +45,14 @@ module.exports = {
             .get(url)
             .then((response) => {
                 let name = response.data[0].organization.charityName
-                let cuase = response.data[0].cause.causeName
+                let cause = response.data[0].cause.causeName
                 let mission = response.data[0].mission
                 let url = response.data[0].websiteURL
                 let tagline = response.data[0].tagLine
 
                 let charityObject = {
                     name: name,
-                    cuase: cuase,
+                    cause: cause,
                     mission: mission,
                     url: url,
                     tagline: tagline
@@ -77,14 +77,14 @@ module.exports = {
             .then((response) => {
 
                 let name = response.data[0].organization.charityName
-                let cuase = response.data[0].cause.causeName
+                let cause = response.data[0].cause.causeName
                 let mission = response.data[0].mission
                 let url = response.data[0].websiteURL
                 let tagline = response.data[0].tagLine
 
                 let charityObject = {
                     name: name,
-                    cuase: cuase,
+                    cause: cause,
                     mission: mission,
                     url: url,
                     tagline: tagline
@@ -100,7 +100,7 @@ module.exports = {
                         $or: [
                             { "celebrity": { "$in": [search] } },
                             { "name": { "$in": [search] } },
-                            { "cuase": { "$in": [search] } },
+                            { "cause": { "$in": [search] } },
                             { "mission": { "$in": [search] } },
                         ]
                     })
@@ -129,7 +129,7 @@ module.exports = {
     addCeleb: function (req, res) {
         const celebName = req.body.celeb
         const charityname = req.body.charity
-        const cuase = req.body.cause
+        const cause = req.body.cause
         const mission = req.body.mission
         const url = req.body.url
         const tagline = req.body.tagLine
@@ -137,7 +137,7 @@ module.exports = {
         const celeb = {
             celebrity: celebName,
             name: charityname,
-            cuase: cuase,
+            cause: cause,
             mission: mission,
             url: url,
             tagline: tagline
