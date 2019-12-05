@@ -17,10 +17,10 @@ const chatSchema = new Schema({
         allowNull: false,
     },
 
-    // createdAt: {
-    //     type: "TIMESTAMP",
-    //     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-    // }
+    createdAt: {
+        type: Date, 
+        default: Date.now 
+    }
 
 });
 
