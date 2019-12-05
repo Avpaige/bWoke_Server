@@ -15,13 +15,13 @@ module.exports = server => {
 
         });
 
-        for (const room of this.rooms) {
-            socket.on('chat message', (data) => {
-                const { room, message } = data
-                console.log('got message', message);
-                socket.broadcast.to(room).emit('broadcast', message);
-            });
-        };
+        socket.on('chat message', (data) => {
+            const { room, message } = data
+            console.log('got message', message);
+            console.log('Room its beign sent to', message);
+            socket.broadcast.to(room).emit('broadcast', message);
+        });
+
 
         socket.on('leave room', (room) => {
             socket.leave(room);
