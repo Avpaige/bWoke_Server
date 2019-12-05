@@ -83,7 +83,10 @@ module.exports = {
             .populate("messages")
             .then(foundChats => {
                 // console.log(handlebarsObject)
-                res.json(foundChats[0].messages);
+                if (foundChats[0].messages.length > 0) {
+
+                    res.json(foundChats[0].messages);
+                }
 
                 console.log(foundChats)
 
