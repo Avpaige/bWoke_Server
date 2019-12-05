@@ -21,9 +21,10 @@ module.exports = {
 
                 bcrypt.compare(password, enteredPass, function (err, confirm) {
                     if (confirm) {
-                        res.json({
-                            username: results.username
-                        });
+                        // res.json({
+                        //     username: results.username
+                        // });
+                        res.json({ error: "false" });
                     } else {
                         res.json({ error: "true" });
                     }
