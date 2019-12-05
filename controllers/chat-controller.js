@@ -13,7 +13,7 @@ module.exports = {
         }
 
         let messagePost = {
-            message: message,
+            text: message,
             username: user
         }
 
