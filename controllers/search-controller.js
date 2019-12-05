@@ -12,22 +12,14 @@ module.exports = {
 
         // console.log(search)
         db.Celeb
-            .find({
-                $or: [
-                    { "celebrity": { "$in": [search] } },
-                    { "name": { "$in": [search] } },
-                    { "cause": { "$in": [search] } },
-                    { "mission": { "$in": [search] } },
-                    { "url": { "$in": [search] } },
-                    { "tagline": { "$in": [search] } },
-                ]
-            })
+            .find({ celebrity: search })
             .then(results => {
-                if (results === []) {
-                    res.json({ data: "none" });
-                } else {
-                    res.json(results)
-                }
+                console.log(results)
+                // if (results === []) {
+                //     res.json({ data: "none" });
+                // } else {
+                res.json(results)
+                // }
 
             })
             .catch(err => {
@@ -92,31 +84,32 @@ module.exports = {
 
                 resultsList.push(charityObject)
 
-
-            })
-            .then(() => {
                 db.Celeb
-                    .find({
-                        $or: [
-                            { "celebrity": { "$in": [search] } },
-                            { "name": { "$in": [search] } },
-                            { "cause": { "$in": [search] } },
-                            { "mission": { "$in": [search] } },
-                        ]
-                    })
+                    .find({ celebrity: search })
                     .then(results => {
+                        console.log(results)
+
                         for (let result of results) {
                             resultsList.push(result)
+                        }
+
+                        if (resultsList === []) {
+                            res.json({ data: "none" });
+                        } else {
+                            res.json(resultsList)
                         }
 
                     })
                     .catch(err => {
                         // res.status(422)
-                        console.log("create volunteer", err)
+                        res.json({ data: "none" });
+                        console.log("", err)
                     });
 
+
+
             })
-            .then(() => res.json(resultsList))
+
             .catch(err => {
                 // res.status(422);
                 res.json({ data: "none" });
