@@ -19,8 +19,8 @@ const celebritiesSchema = new Schema({
         required: true
     },
 
-    // charity cuase
-    cuase: {
+    // charity cause
+    cause: {
 
         type: String,
         unique: false,

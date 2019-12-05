@@ -5,22 +5,19 @@ const eventsSchema = new Schema({
     
     title: {
         type: String,
-        required: true,
-        Default: false
+        required: true
     },
     name: {
         type: String, 
-        required: true,
-        Default: false
+        required: true
     },
     description: {
         type: String, 
-        required: true,
-        Default: false
+        required: true
     },
     date: {
         type: Date,
-        Default: Date.now
+        required: true
     }
 })
 
