@@ -1,7 +1,6 @@
 module.exports = server => {
     const io = require('socket.io')(server);
-    const nsp = io.of("/chat")
-    let rooms = ["Immigration", "Women's Rights", "Foster Families", "LGBTQIA", "Civil Rights", "Animals", "Environment", "International", "Community Developement", "Public Policy", "Gun Safety"]
+    const nsp = io.of("/talk")
 
     nsp.on('connection', function (socket) {
         socket.emit('connected_success')
