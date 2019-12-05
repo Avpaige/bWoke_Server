@@ -82,12 +82,8 @@ module.exports = {
         db.Room.find({ room: room })
             .populate("messages")
             .then(foundChats => {
-                // console.log(handlebarsObject)
-                if (foundChats[0].messages.length > 0) {
 
                     res.json(foundChats[0].messages);
-                }
-
                 console.log(foundChats)
 
                 // response.json(handlebarsObject)
@@ -95,6 +91,7 @@ module.exports = {
             })
             .catch(err => {
                 console.log(err);
+                res.json({results: "none"});
                 response.status(500);
             })
     },
