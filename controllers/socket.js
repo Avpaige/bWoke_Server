@@ -1,6 +1,6 @@
 module.exports = server => {
     const io = require('socket.io')(server);
-    const nsp = io.of("/chat")
+    const nsp = io.of("/talk")
     let rooms = ["Immigration", "Women's Rights", "Foster Families", "LGBTQIA", "Civil Rights", "Animals", "Environment", "International", "Community Developement", "Public Policy", "Gun Safety"]
 
     nsp.on('connection', function (socket) {
