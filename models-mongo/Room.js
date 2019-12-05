@@ -8,7 +8,7 @@ var ChatRoomSchema = new Schema({
   },
   messages: [{
     type: Schema.Types.ObjectId,
-    ref: "Chat"
+    ref: "chat"
   }]
 });
 

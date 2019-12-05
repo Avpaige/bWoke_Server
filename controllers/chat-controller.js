@@ -77,14 +77,14 @@ module.exports = {
 
     // (GET) - all events
     getMessages: function (req, res) {
-        let room = req.params.room
+        let roomMes = req.params.room
 
-        db.Room.find({ room: room })
+        db.Room.find({ room: roomMes })
             .populate("messages")
             .then(foundChats => {
 
-                    res.json(foundChats[0].messages);
-                console.log(foundChats)
+                res.json(foundChats[0]);
+                // console.log(foundChats)
 
                 // response.json(handlebarsObject)
                 response.status(200);
